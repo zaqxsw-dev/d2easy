@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Centered Chart Example</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background: #f7f7f7;
+    }
+    .chart-container {
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 4px 18px rgba(0,0,0,0.07);
+      padding: 32px 40px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    canvas {
+      max-width: 350px;
+      max-height: 350px;
+    }
+  </style>
+</head>
+<body>
+  <div class="chart-container">
+    <h2>D2 atk chart</h2>
+    <canvas id="myChart" width="350" height="350"></canvas>
+  </div>
+  <script>
+    function getRandomInt(min, max) {
+        return Math.floor(Math.random() * max)+min;
+    }
+
+    let damage_min = 45;
+    let damage_max = 51;
+    let dmg_data = [];
+    let labels = [];
+    let last_dmg = 0;
+    for(let i = 0; i < 10; i++) {
+      let damage = getRandomInt(damage_min, damage_max);
+      dmg_data.push(last_dmg+damage);
+      labels.push(i+1);
+      last_dmg += damage;
+    }
+    const ctx = document.getElementById('myChart').getContext('2d');
+    new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: labels,
+        datasets: [{
+          label: 'DMG',
+          data: dmg_data,
+          backgroundColor: [
+            '#f87171', '#60a5fa', '#facc15', '#4ade80', '#a78bfa'
+          ]
+        }]
+      },
+      options: {
+        responsive: false,
+        plugins: {
+          legend: {
+            display: false
+          }
+        },
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        }
+      }
+    });
+  </script>
+</body>
+</html>
