@@ -49,7 +49,6 @@
     let damage_max = 51;
 
     let dmg_data = [];
-    const labels = Array.from({ length: 10 }, (_, i) => i + 1);
     let last_dmg = 0;
 
     for(let i = 0; i < 10; i = i+1.7) {
@@ -62,7 +61,6 @@
     new Chart(ctx, {
       type: 'line',
       data: {
-        labels: labels,
         datasets: [{
           label: 'DMG',
           data: dmg_data,
@@ -78,6 +76,21 @@
           }
         },
         scales: {
+          x: {
+            type: 'linear',
+            min: 1,
+            max: 10,
+            ticks: {
+              stepSize: 1,
+              callback: function(value) {
+                return Number.isInteger(value) ? value : null;
+              }
+            },
+            title: {
+              display: true,
+              text: 'X Axis (1 to 10)'
+            }
+          },
           y: {
             beginAtZero: true
           }
