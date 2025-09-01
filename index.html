@@ -57,13 +57,29 @@
       last_dmg += damage;
     }
 
+    let dmg_data_oracle = [];
+    damage_min = 39;
+    damage_max = 45;
+    last_dmg = 0;
+    for(let i = 1.7; i < 10; i = i+1.7) {
+      let damage = getRandomInt(damage_min, damage_max);
+      dmg_data.push({x: i, y: last_dmg+damage});
+      last_dmg += damage;
+    }
+
     const ctx = document.getElementById('myChart').getContext('2d');
     new Chart(ctx, {
       type: 'line',
       data: {
         datasets: [{
-          label: 'DMG',
+          label: 'DMG IO',
           data: dmg_data,
+          fill: false,
+          tension: 0.2
+        },{
+          label: 'DMG ORACLE',
+          data: dmg_data_oracle,
+          borderColor: 'red',
           fill: false,
           tension: 0.2
         }]
