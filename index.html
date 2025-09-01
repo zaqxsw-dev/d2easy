@@ -47,15 +47,17 @@
 
     let damage_min = 45;
     let damage_max = 51;
-    let dmg_data = [];
-    let labels = [];
+
+    let dmg_data = {};
+    const labels = Array.from({ length: 10 }, (_, i) => i + 1);
     let last_dmg = 0;
-    for(let i = 0; i < 10; i++) {
+
+    for(let i = 1.7; i < 10; i+1.7) {
       let damage = getRandomInt(damage_min, damage_max);
-      dmg_data.push(last_dmg+damage);
-      labels.push(i+1);
+      dmg_data[i] = last_dmg+damage;
       last_dmg += damage;
     }
+
     const ctx = document.getElementById('myChart').getContext('2d');
     new Chart(ctx, {
       type: 'line',
