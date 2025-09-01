@@ -52,7 +52,7 @@
     const labels = Array.from({ length: 10 }, (_, i) => i + 1);
     let last_dmg = 0;
 
-    for(let i = 0; i < 10; i+1.7) {
+    for(let i = 0; i < 10; i = i+1.7) {
       let damage = getRandomInt(damage_min, damage_max);
       dmg_data.push({x: i, y: last_dmg+damage});
       last_dmg += damage;
