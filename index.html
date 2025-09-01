@@ -40,7 +40,9 @@
   </div>
   <script>
     function getRandomInt(min, max) {
-        return Math.floor(Math.random() * max)+min;
+        let range = max - min;
+        let rand = Math.floor(Math.random() * range);
+        return min + rand;
     }
 
     let damage_min = 45;
